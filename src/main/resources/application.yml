@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: ComfyUIAPI
+  data:
+    mongodb:
+      host: 127.0.0.1
+      port: 27017
+      database: comfyui
+      #username: admin
+      #password: 123456
+logging:
+  config: classpath:logback/logback.xml
+server:
+  port: 8080
+comfyui:
+  baseurl: https://rnrgc-34-148-52-31.a.free.pinggy.link/
+  wsurl: ws://rnrgc-34-148-52-31.a.free.pinggy.link/ws
+  client-id: 98300168214448d78c724a5508ebaff7
+minio:
+  host: http://127.0.0.1:9000
+  bucket: comfyui
+  access-key: ILxBNsjjYoBBaRqFr3FZ
+  secret-key: ROWpCsfm8D6ROpLrqsAos0jVVLCyTL4yLfx7QGvD

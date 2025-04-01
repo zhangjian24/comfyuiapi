@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <!--应用名,从springboot 中的application.yml 读取-->
+    <springProperty scope="context" name="APP_NAME" source="spring.application.name" defaultValue="app"/>
+    <!--日志根目录-->
+    <property scope="context" name="LOG_HOME" value="logs" />
+    <!--应用启动时间-->
+    <timestamp key="bySecond" datePattern="yyyyMMddHHmmss"/>
+
+    <!--日志输出格式-->
+    <property name="pattern" value="%-4relative [%thread] %-5level %logger{35} - %msg%n"/>
+
+    <!-- ConsoleAppender：把日志输出到控制台 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!--每次启动写一个文件-->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_HOME}/${APP_NAME}-${bySecond}.log</file>
+        <encoder>
+            <pattern>${pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!--滚动日志-->
+    <appender name="ROLLING_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/${APP_NAME}-rolling.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 每天一个文件 -->
+            <fileNamePattern>${LOG_HOME}/${APP_NAME}-rolling.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+            <!--最多保持3个文件,最多3gb -->
+            <maxHistory>3</maxHistory>
+            <totalSizeCap>3GB</totalSizeCap>
+
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+
+    <!-- 控制台输出日志级别 -->
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+        <appender-ref ref="ROLLING_FILE" />
+    </root>
+    <!-- 级别依次为【从高到低】：FATAL > ERROR > WARN > INFO > DEBUG > TRACE  -->
+</configuration>

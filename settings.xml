@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+  <servers>
+    <server>
+      <id>ape2zhangjian-samplecode-jar</id>
+      <username>${env.MY_MAVEN_USERNAME}</username>
+      <password>${env.MY_MAVEN_PASSWORD}</password>
+    </server>
+  </servers>
+</settings>
