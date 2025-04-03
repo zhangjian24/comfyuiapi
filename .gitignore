@@ -27,3 +27,5 @@ replay_pid*
 logs/
 target/
 /**/*/*.iml
+/docker/ComfyUI/ComfyUI
+/docker/ComfyUI/ComfyUI-Manager
